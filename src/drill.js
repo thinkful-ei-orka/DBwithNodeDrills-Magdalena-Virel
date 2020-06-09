@@ -50,5 +50,19 @@ function resentItems(daysAgo) {
     .finally(()=>db.destroy());
 }
 
-resentItems(2)
+//resentItems(2)
 
+function totalCost(){
+    db
+        .select('category')
+        .from('shopping_list')
+        .groupBy('category')
+        .sum('price as total')
+        .then(result => {
+            console.log('COST PER CATEGORY')
+            console.log(result)
+          })
+        .finally(()=>db.destroy());
+}
+
+totalCost();
